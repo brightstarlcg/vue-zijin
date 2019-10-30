@@ -15,9 +15,9 @@ router.get('/test', (req, res) => {
 // @route  POST api/profiles/add
 // @desc   创建信息接口
 // @access Private
+//poassport.authenticate 则加入了认证权限,会调用 passport.js中
 router.post(
-  '/add',
-  passport.authenticate('jwt', { session: false }),
+  '/add',passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const profileFields = {};
     console.log(req)
@@ -29,7 +29,9 @@ router.post(
     if (req.body.cash) profileFields.cash = req.body.cash;
     if (req.body.remark) profileFields.remark = req.body.remark;
 
-    new Profile(profileFields).save().then(profile => {
+    new Profile(profileFields).save()
+    .then(profile => {
+      console.log(profile)
       res.json(profile);
     });
   }

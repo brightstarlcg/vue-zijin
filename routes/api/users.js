@@ -38,6 +38,7 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         identity: req.body.identity
       });
+      //密码加密
 
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -69,16 +70,22 @@ router.post('/login', (req, res) => {
     }
 
     // 密码匹配
+    // /947583283@qq.com
     bcrypt.compare(password, user.password).then(isMatch => {
+     
       if (isMatch) {
+        console.log(password)
+        console.log(user.password)
         const rule = {
           id: user.id,
           name: user.name,
           avatar: user.avatar,
           identity: user.identity
         };
+        //生成token
         jwt.sign(rule, keys.secretOrKey, { expiresIn: 360000}, (err, token) => {
           if (err) throw err;
+          console.log(token)
           res.json({
             success: true,
             token: 'Bearer ' + token

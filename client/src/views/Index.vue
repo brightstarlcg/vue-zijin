@@ -17,7 +17,8 @@ export default {
   components: {
     HeadNav,
     LeftMenu
-  }
+  },
+
 };
 </script>
 <style scoped>

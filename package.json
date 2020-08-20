@@ -23,6 +23,6 @@
     "validator": "^10.2.0"
   },
   "devDependencies": {
-    "bcrypt": "^3.0.6"
+    "bcrypt": "^5.0.0"
   }
 }
